@@ -1,30 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { parse } from 'node-html-parser';
+import Track from './Track';
 
-const Tracklist = () => {
-  const [state, setState] = useState({});
+const Tracklist = (props) => {
+  const { state } = props;
+  const [visibility, toggleVisibility] = useState(false);
+  const [selectIdx, setIdx] = useState(0);
 
-  useEffect(() => {
-    const fetchTracks = async () => {
-      const { data } = await axios.get('/webscrape');
-      setState(data);
-    };
-    fetchTracks();
-  }, []);
+  const mouseEnter = (idx) => {
+    setIdx(idx);
+    toggleVisibility(true);
+  };
+  const mouseOut = () => {
+    toggleVisibility(false);
+  };
+
   return (
-    <div>
-      {state.pictureUrls ? (
-        state.pictureUrls.map((picture, idx) => {
-          return (
-            <a href={`http://tygko.bandcamp.com/${state.musicUrls[idx]}`}>
-              <img src={picture} />
-            </a>
-          );
-        })
-      ) : (
-        <></>
-      )}
+    <div className="release-list">
+      <div className="tracks-list">
+        {state.titles ? (
+          state.titles.map((title, idx) => {
+            return (
+              <div
+                className="track"
+                idx={idx}
+                onMouseEnter={() => mouseEnter(idx)}
+                onMouseOut={() => mouseOut()}
+              >
+                <Track
+                  key={idx}
+                  idx={idx}
+                  title={title}
+                  picture={state.pictures[idx]}
+                  url={state.musicUrls[idx]}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <></>
+        )}
+      </div>
+      <img
+        className="track-picture"
+        idx={selectIdx}
+        src={state.pictures[selectIdx]}
+        alt={state.title}
+        width="250px"
+        style={{
+          visibility: visibility ? 'visible' : 'hidden',
+          zIndex: -1,
+          display: 'inline',
+        }}
+      />
     </div>
   );
 };

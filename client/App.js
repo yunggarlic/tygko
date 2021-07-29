@@ -1,37 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Tracklist from './components/Tracklist';
+import VideoPlayer from './components/VideoPlayer';
+import SocialLinks from './components/SocialLinks';
+import MusicLinks from './components/MusicLinks';
+import Copyright from './components/Copyright';
+import ThreeScene from './components/threeScene/ThreeScene';
 
 export default function App() {
+  const [state, setState] = useState({});
+  const [loaded, toggleLoaded] = useState(false);
+
+  useEffect(() => {
+    const fetchTracks = async () => {
+      const { data } = await axios.get('/webscrape');
+      setState(data);
+      toggleLoaded(true);
+    };
+    fetchTracks();
+  }, []);
+
   return (
-    <>
-      <h1>TYGKO</h1>
-      <h2>Links</h2>
-      <ul>
-        <li>SHOP</li>
-        <li>LINKS</li>
-      </ul>
-      <h2>Video embedded</h2>
-      <h3>Links</h3>
-      <ul>
-        <li>
-          <a href="https://tygko.bandcamp.com/">Bandcamp</a>
-        </li>
-        <li>Spotify</li>
-        <li>
-          <a href="https://twitter.com/TYG_KO">Twitter</a>
-        </li>
-      </ul>
-      <Tracklist />
-      <ul>
-        <li>Song 1</li>
-        <li>Song 2</li>
-        <li>Song 3</li>
-      </ul>
-      <h4>Internal Links</h4>
-      <ul>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </>
+    <div className="main">
+      {loaded ? (
+        <>
+          <h1 style={{ fontSize: '3.052em' }}>TYGKO</h1>
+          <MusicLinks />
+          <VideoPlayer />
+          <Tracklist state={state} />
+          <SocialLinks />
+          <Copyright />
+          <div className="scene">
+            <ThreeScene />
+          </div>
+        </>
+      ) : (
+        <h1>Loading...</h1>
+      )}
+    </div>
   );
 }

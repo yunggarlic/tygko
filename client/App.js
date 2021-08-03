@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Tracklist from './components/Tracklist';
-import VideoPlayer from './components/VideoPlayer';
-import SocialLinks from './components/SocialLinks';
-import MusicLinks from './components/MusicLinks';
-import Copyright from './components/Copyright';
+import Content from './components/Content';
+import Footer from './components/Footer';
 import ThreeScene from './components/threeScene/ThreeScene';
+import Header from './components/Header';
 
 export default function App() {
   const [state, setState] = useState({});
@@ -24,15 +22,10 @@ export default function App() {
     <div className="main">
       {loaded ? (
         <>
-          <h1 style={{ fontSize: '3.052em' }}>TYGKO</h1>
-          <MusicLinks />
-          <VideoPlayer />
-          <Tracklist state={state} />
-          <SocialLinks />
-          <Copyright />
-          <div className="scene">
-            <ThreeScene />
-          </div>
+          <Header />
+          <Content state={state} />
+          <Footer />
+          <ThreeScene />
         </>
       ) : (
         <h1>Loading...</h1>

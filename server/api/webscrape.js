@@ -33,6 +33,7 @@ router.get('/', async (req, res) => {
 
 const bandcampScrape = async () => {
   //creates DOM Object from stringified html
+  console.log('hello bandcamp scraping');
   const pageHtml = await getPageHtml('http://tygko.bandcamp.com');
   const domObject = parse(pageHtml);
 

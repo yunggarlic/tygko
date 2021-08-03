@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Track from './Track';
+import ThreeScene from './threeScene/ThreeScene';
 
 const Tracklist = (props) => {
   const { state } = props;
@@ -46,6 +47,7 @@ const Tracklist = (props) => {
         src={state.pictures[selectIdx]}
         alt={state.title}
         width="250px"
+        height="216px"
         style={{
           visibility: visibility ? 'visible' : 'hidden',
           zIndex: -1,

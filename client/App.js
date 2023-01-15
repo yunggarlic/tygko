@@ -11,7 +11,7 @@ export default function App() {
 
   useEffect(() => {
     const fetchTracks = async () => {
-      const { data } = await axios.get('/webscrape');
+      const { data } = await axios.get('/musicData');
       setState(data);
       toggleLoaded(true);
     };

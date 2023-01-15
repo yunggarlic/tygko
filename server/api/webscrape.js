@@ -4,6 +4,7 @@ const { parse } = require('node-html-parser');
 const redis = require('redis');
 const redisPort = process.env.REDIS_URL || 6379;
 const client = redis.createClient(redisPort);
+const fs = require('fs');
 
 router.get('/', async (req, res) => {
   try {
@@ -16,6 +17,7 @@ router.get('/', async (req, res) => {
       } else {
         //if the redis does not have anything already saved to it, run long webscrape
         const data = await bandcampScrape();
+        fs.writeFile('data.json', data);
         let idx = 0;
         for (let key in data) {
           //setex(pire) = 4 hours before deletion
@@ -34,7 +36,7 @@ router.get('/', async (req, res) => {
 const bandcampScrape = async () => {
   //creates DOM Object from stringified html
   console.log('hello bandcamp scraping');
-  const pageHtml = await getPageHtml('http://tygko.bandcamp.com');
+  const pageHtml = await getPageHtml('http://tygko.bandcamp.com/music');
   const domObject = parse(pageHtml);
 
   //grabs the artist homepage release grid and filters each li element into array
@@ -66,13 +68,16 @@ const bandcampScrape = async () => {
       urlObject.titles.push(
         title.innerHTML
           .replace(/^\s+|\s+$|\s+(?=\s)/g, '')
-          .replace(/\b&amp;\b/, '&')
+          .replace('&amp;', '&')
       );
     }
     if (pictures) {
       urlObject.pictures.push(pictures._attrs.href);
     }
   }
+  fs.writeFile('data.json', urlObject, (err) => {
+    console.error(err);
+  });
   return urlObject;
 };
 

@@ -51,7 +51,6 @@ const Tracklist = (props) => {
         style={{
           visibility: visibility ? 'visible' : 'hidden',
           zIndex: -1,
-          display: 'inline',
         }}
       />
     </div>

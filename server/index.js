@@ -4,6 +4,7 @@ const morgan = require('morgan');
 
 const puppeteer = require('puppeteer');
 const { parse } = require('node-html-parser');
+const fs = require('fs');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 

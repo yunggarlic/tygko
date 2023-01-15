@@ -22,9 +22,11 @@ export default function App() {
     <div className="main">
       {loaded ? (
         <>
-          <Header />
-          <Content state={state} />
-          <Footer />
+          <div class="loaded-content">
+            <Header />
+            <Content state={state} />
+            <Footer />
+          </div>
           <ThreeScene />
         </>
       ) : (

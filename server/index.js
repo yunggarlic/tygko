@@ -13,7 +13,6 @@ app.use(morgan('dev'));
 
 //Webscrape Api middleware
 
-app.use('/webscrape', require('./api/webscrape'));
 app.use('/musicData', require('./api/musicData'));
 
 setInterval(() => {

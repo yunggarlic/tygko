@@ -4,6 +4,7 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 import ThreeScene from './components/threeScene/ThreeScene';
 import Header from './components/Header';
+import '../public/style.less';
 
 export default function App() {
   const [state, setState] = useState({});

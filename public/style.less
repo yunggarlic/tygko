@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@100;300;600&display=swap");
+
+body {
+  margin: 0 auto;
+  z-index: -3;
+  background: black;
+  color: white;
+  font-family: "Hahmlet", serif;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  overflow: auto;
+
+  header {
+    margin-bottom: 1em;
+  }
+
+  .loaded-content {
+    height: 100%;
+  }
+
+  .scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+
+  ul {
+    display: block;
+    list-style-type: none;
+    padding-inline-start: 0px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease-in-out;
+
+    &:hover {
+      border-color: white;
+    }
+  }
+
+  .music-links a,
+  .social-links a,
+  .video-player {
+    margin: 1em;
+  }
+
+  .release-list {
+    margin: 0 auto;
+    max-width: 700px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+
+  .tracks-list {
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+      align-items: center;
+    }
+  }
+
+  .track-picture {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  footer {
+    padding-bottom: 1em;
+  }
+
+  iframe {
+    @media screen and (max-width: 768px) {
+      margin-bottom: 20px;
+      width: 280px;
+      height: 157.5px;
+    }
+  }
+}

@@ -1,10 +1,11 @@
 // const webpack = require('webpack');
 
+console.log(__dirname);
 module.exports = {
   entry: './client/main.js',
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './public/tygko-bundle.js'
   },
   module: {
     rules: [
